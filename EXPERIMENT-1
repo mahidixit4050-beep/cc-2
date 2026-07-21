@@ -1,0 +1,63 @@
+                                                EXPERIMENT 1.1-     CONTAINS DUPLICATE PROBLEM  [LEET CODE PROBLEM 217]
+Aim - Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+Algorithm -  Contains Duplicate
+Start.
+Take the input array nums.
+Sort the array in ascending order.
+Traverse the array from the second element (i = 1) to the last element.
+Compare the current element nums[i] with the previous element nums[i-1].
+If both elements are equal, return true (duplicate found).
+If the loop finishes without finding any duplicate, return false.
+End.
+
+CODE - class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+
+        for(int i=1; i < nums.size();i++) {
+            if (nums[i]==nums[i-1]){
+                return true;
+            }
+        }
+
+        return false;
+    }
+};  
+
+
+
+
+                                EXPERIMENT 1.2- CONTAINS DUPLICATE PROBLEM 2 [LEET CODE PROBLEM - 219]
+Aim-Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+
+ Algorithm - Contains Nearby Duplicate
+Start.
+Create an empty hash map (unordered_map) to store each element and its latest index.
+Traverse the array nums from index 0 to n-1.
+For each element:
+Check if it already exists in the hash map.
+If it exists, calculate the distance between the current index and the stored index.
+If the distance is less than or equal to k, return true.
+Update the hash map by storing the current element with its current index.
+Continue until all elements are checked.
+If no nearby duplicate is found, return false.
+End.
+
+CODE-class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        unordered_map<int,int> mp;
+        for(int i=0; i<nums.size(); i++){
+            
+            if (mp.find(nums[i]) != mp.end() && abs(i - mp[nums[i]]) <= k) {
+                    return true;
+               \ }
+                mp[nums[i]]=i;
+
+            }
+            return false;
+        }
+    
+    };
