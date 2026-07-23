@@ -1,0 +1,40 @@
+                                          BINARY SEARCH - LEET CODE PROBLEM 35
+AIM - Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.                                          
+
+ALGORITHM -Search Insert Position (Binary Search)
+Start
+Initialize low = 0 and high = nums.size() - 1.
+Repeat while low <= high:
+Calculate the middle index:
+mid = low + (high - low) / 2
+If nums[mid] == target:
+Return mid (target found).
+Else if nums[mid] < target:
+Set low = mid + 1 (search in the right half).
+Else:
+Set high = mid - 1 (search in the left half).
+If the loop ends, the target is not present.
+Return low, which is the correct insertion position.
+Stop
+
+CODE: 
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size() - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (nums[mid] == target)
+                return mid;
+            else if (nums[mid] < target)
+                low = mid + 1;
+            else
+                high = mid - 1;
+        }
+
+        return low;
+    }
+};
