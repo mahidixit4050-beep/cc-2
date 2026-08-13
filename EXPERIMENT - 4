@@ -1,0 +1,85 @@
+                                                                Experiment-4 
+A) Middle of the Linked List
+B) palindrome Linked List
+
+    AIM (A) - Given the head of a singly linked list, return the middle node of the linked list.
+     If there are two middle nodes, return the second middle node.
+
+ALGORITHM- 
+
+1. Start two pointers, slow and fast, at the head of the linked list.
+2. Move slow one node at a time.
+3. Move fast two nodes at a time.
+4. Continue this process while:
+
+  fast != NULL && fast->next != NULL
+
+5. When fast reaches the end of the linked list, slow will be at the middle node.
+6. Return slow.
+7. For an even number of nodes, this method automatically returns the second middle node.
+
+CODE- 
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while (fast != nullptr && fast->next != nullptr) {
+
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        return slow;
+    }
+};
+
+                                  AIM(B)- Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+ALGORITHM- Using Stack
+
+1. Create an empty stack st.
+2. Set a temporary pointer temp to head.
+3. Traverse the entire linked list:
+       Push each node's value into the stack.
+       Move temp to the next node.
+4. Reset temp back to head.
+5. Traverse the linked list again:
+       Compare temp->val with st.top().
+       If they are different, return false.
+       If they are the same, pop the top element from the stack.
+       Move temp to the next node.
+6. If all values match, return true.
+
+CODE-
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+
+        stack<int> st;
+
+        ListNode* temp = head;
+
+        while (temp != NULL) {
+            st.push(temp->val);
+            temp = temp->next;
+        }
+
+       
+        temp = head;
+
+        while (temp != NULL) {
+
+            if (temp->val != st.top()) {
+                return false;
+            }
+
+            st.pop();
+            temp = temp->next;
+        }
+
+        return true;
+    }
+};
